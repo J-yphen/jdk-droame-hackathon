@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1083216360518",
+    "project_id": "jdk-auth",
+    "storage_bucket": "jdk-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083216360518:android:743dadb15f4ae7cd41c647",
+        "android_client_info": {
+          "package_name": "com.example.jdk_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083216360518-j361qrjlljibl5jekive2n8ts92svm3j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIMit4WDEYgsxHeLm8N3a1ixN0c56AL34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083216360518-j361qrjlljibl5jekive2n8ts92svm3j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
