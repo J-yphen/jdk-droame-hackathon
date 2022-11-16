@@ -1,6 +1,6 @@
 # JDK Droame Hackathon
 
-This is a flutter based cross platform mobile application our team build for *Droame Hackathon*
+This is a flutter based cross platform mobile application our team is building for the *Droame Hackathon*
 
 
 ### Our Team Members
