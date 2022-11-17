@@ -1,21 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
- 
+
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
- 
+
   @override
-  MyCustomFormState createState() {
-    return MyCustomFormState();
+  LoginFormState createState() {
+    return LoginFormState();
   }
 }
- 
-class MyCustomFormState extends State<LoginForm> {
+
+class LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-  final mail = TextEditingController();
-  final pass = TextEditingController();
- 
+  final _mail = TextEditingController();
+  final _pass = TextEditingController();
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _mail.text.trim(),
+      password: _pass.text.trim(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _mail.dispose();
+    _pass.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,78 +47,89 @@ class MyCustomFormState extends State<LoginForm> {
                 ),
               ),
               SizedBox(height: 15),
-             
+
               Text(
                 'Please login to continue...',
                 style: TextStyle(
                   fontSize: 20,
                 ),
               ),
+
               SizedBox(height: 40),
+
+              // Email field
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border:
-                        Border.all(color: Color.fromARGB(255, 14, 120, 124)),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Email-ID',
-                      ),
+                child: TextField(
+                  controller: _mail,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(0),
+                      borderSide: BorderSide(color: Colors.white, width: 5),
                     ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(color: Colors.amber, width: 5),
+                    ),
+                    hintText: 'Email',
+                    fillColor: Color.fromARGB(255, 250, 250, 250),
+                    filled: true,
                   ),
                 ),
               ),
+
               SizedBox(height: 10),
+
+              // Password field
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border:
-                        Border.all(color: Color.fromARGB(255, 14, 120, 124)),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Password',
-                      ),
-                      obscureText: true,
+                child: TextField(
+                  obscureText: true,
+                  controller: _pass,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(0),
+                      borderSide: BorderSide(color: Colors.white, width: 5),
                     ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(color: Colors.amber, width: 5),
+                    ),
+                    hintText: 'Password',
+                    fillColor: Color.fromARGB(255, 250, 250, 250),
+                    filled: true,
                   ),
                 ),
               ),
+
               SizedBox(height: 20),
+
+              // Sign In Button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                child: GestureDetector(
+                  onTap: signIn,
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Sign In',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
               SizedBox(height: 30),
-             
+
+              // Register Button
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 // ignore: prefer_const_literals_to_create_immutables
@@ -126,4 +151,3 @@ class MyCustomFormState extends State<LoginForm> {
     );
   }
 }
- 
