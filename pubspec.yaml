@@ -39,6 +39,9 @@ dependencies:
   firebase_core: ^2.2.0
   firebase_auth: ^4.1.2
   google_fonts: ^3.0.1
+  file_picker: ^5.2.2
+  network_info_plus: ^3.0.1
+  permission_handler: ^10.2.0
 
 
 dev_dependencies:

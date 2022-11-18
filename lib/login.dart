@@ -1,35 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+ 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
-
+ 
   @override
   LoginFormState createState() {
     return LoginFormState();
   }
 }
-
+ 
 class LoginFormState extends State<LoginForm> {
-  final _formKey = GlobalKey<FormState>();
   final _mail = TextEditingController();
   final _pass = TextEditingController();
-
+ 
   Future signIn() async {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: _mail.text.trim(),
       password: _pass.text.trim(),
     );
   }
-
+ 
   @override
   void dispose() {
     _mail.dispose();
     _pass.dispose();
     super.dispose();
   }
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,16 +46,16 @@ class LoginFormState extends State<LoginForm> {
                 ),
               ),
               SizedBox(height: 15),
-
+ 
               Text(
                 'Please login to continue...',
                 style: TextStyle(
                   fontSize: 20,
                 ),
               ),
-
+ 
               SizedBox(height: 40),
-
+ 
               // Email field
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -77,9 +76,9 @@ class LoginFormState extends State<LoginForm> {
                   ),
                 ),
               ),
-
+ 
               SizedBox(height: 10),
-
+ 
               // Password field
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -101,9 +100,9 @@ class LoginFormState extends State<LoginForm> {
                   ),
                 ),
               ),
-
+ 
               SizedBox(height: 20),
-
+ 
               // Sign In Button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -128,18 +127,20 @@ class LoginFormState extends State<LoginForm> {
                 ),
               ),
               SizedBox(height: 30),
-
+ 
               // Register Button
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   Text('First time?'),
-                  Text(
-                    ' Register here...',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    child: Text(
+                      ' Register here...',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   )
                 ],
