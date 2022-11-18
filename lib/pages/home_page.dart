@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> openSocket(_fileName, _filePath, wifiIP) async {
     final server = await ServerSocket.bind(wifiIP, 15232);
     server.listen((event) async {
-      print("servering a file");
+      print("Serving a file");
       await File(_filePath).openRead().pipe(event);
       server.close();
     });
