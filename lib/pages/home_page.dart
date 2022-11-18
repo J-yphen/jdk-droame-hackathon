@@ -1,25 +1,26 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:jdk_flutter/pages/server_info.dart';
 import 'dart:io';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'dart:typed_data';
 import 'package:permission_handler/permission_handler.dart';
- 
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
- 
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
- 
+
 class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser!;
   final info = NetworkInfo();
   List<int> toIntList(Uint8List source) {
     return List.from(source);
   }
- 
+
   Future<void> openSocket(_fileName, _filePath, wifiIP) async {
     final server = await ServerSocket.bind(wifiIP, 15232);
     server.listen((event) async {
@@ -28,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       server.close();
     });
   }
- 
+
   Future<void> connectSocket(fileName, wifiIP, port) async {
     var socket = await Socket.connect(wifiIP, port);
     try {
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
       socket.destroy();
     }
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +73,10 @@ class _HomePageState extends State<HomePage> {
                 print(file.path);
                 var wifiIP = await info.getWifiIP();
                 openSocket(file.name, file.path, wifiIP);
+                
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ServerInfoPage(wifiIP: wifiIP, port: 15232),
+                ));
               },
               heroTag: null,
               child: Icon(Icons.upload),
